@@ -1,0 +1,27 @@
+<div class="container py-5 text-center">
+  <h1 class="display-4 fw-bold"><%= ENV.fetch("APP_NAME", "MingleGrid Demo") %></h1>
+  <p class="lead"><%= ENV.fetch("APP_TAGLINE", "") %></p>
+  <% if signed_in? %>
+    <%= link_to "Go to your groups →", support_groups_path, class: "btn btn-lg bg-accent mt-3" %>
+  <% else %>
+    <%= link_to "Sign up to start", sign_up_path, class: "btn btn-lg bg-accent mt-3" %>
+    <%= link_to "Sign in", sign_in_path, class: "btn btn-lg btn-outline-secondary mt-3 ms-2" %>
+  <% end %>
+</div>
+
+<div class="container pb-5">
+  <div class="row g-4 text-center">
+    <div class="col-md-4">
+      <h5>1. Describe</h5>
+      <p class="text-muted">Fill in your group's purpose, meeting cadence, and host organization.</p>
+    </div>
+    <div class="col-md-4">
+      <h5>2. Generate</h5>
+      <p class="text-muted">Gemini returns a S.A.F.E. charter, a four-session launch plan, and two boundary reminders.</p>
+    </div>
+    <div class="col-md-4">
+      <h5>3. Print</h5>
+      <p class="text-muted">Take the charter to your first meeting. Use the boundary reminders when conversation drifts.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Your groups</h1>
+    <%= link_to "New group", new_support_group_path, class: "btn bg-accent" %>
+  </div>
+
+  <% if @support_groups.empty? %>
+    <div class="text-center text-muted py-5">
+      <p class="fs-5">You have no groups yet.</p>
+      <%= link_to "Create your first group", new_support_group_path, class: "btn bg-accent" %>
+    </div>
+  <% else %>
+    <div class="row g-3">
+      <% @support_groups.each do |group| %>
+        <div class="col-md-4">
+          <%= render "card", group: group %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

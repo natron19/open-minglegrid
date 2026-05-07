@@ -1,0 +1,50 @@
+<%= form_with model: support_group, class: "col-lg-8" do |f| %>
+  <%= render "shared/error_messages", object: support_group %>
+
+  <div class="mb-3">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :purpose, class: "form-label" %>
+    <%= f.text_area :purpose, rows: 4, class: "form-control" %>
+    <div class="form-text">Up to 1000 characters. Be specific — the AI uses this to calibrate tone and activities.</div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :target_demographics, "Target demographics (optional)", class: "form-label" %>
+    <%= f.text_area :target_demographics, rows: 2, class: "form-control" %>
+    <div class="form-text">Optional — describe age range, life stage, or shared context.</div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :meeting_cadence, class: "form-label" %>
+    <% SupportGroup::MEETING_CADENCES.each do |cadence| %>
+      <div class="form-check">
+        <%= f.radio_button :meeting_cadence, cadence, class: "form-check-input" %>
+        <%= f.label "meeting_cadence_#{cadence}", cadence.humanize, class: "form-check-label" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :session_length_minutes, "Session length (minutes)", class: "form-label" %>
+    <%= f.number_field :session_length_minutes, class: "form-control", placeholder: "e.g. 60 or 90", min: 30, max: 180 %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :organization_type, class: "form-label" %>
+    <%= f.select :organization_type,
+        SupportGroup::ORGANIZATION_TYPES.map { |t| [t.humanize, t] },
+        { include_blank: "— select one —" },
+        class: "form-select" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.submit support_group.new_record? ? "Create group" : "Save changes", class: "btn bg-accent" %>
+    <% if support_group.new_record? %>
+      <p class="text-muted small mt-2">Creating the group doesn't call AI yet. You'll generate the charter from the group page.</p>
+    <% end %>
+  </div>
+<% end %>

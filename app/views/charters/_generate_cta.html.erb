@@ -1,0 +1,37 @@
+<div data-controller="charter-loading"
+     data-action="turbo:submit-start->charter-loading#start">
+
+  <div data-charter-loading-target="cta">
+    <div class="card">
+      <div class="card-body text-center py-5">
+        <% if local_assigns[:error].present? %>
+          <div class="alert alert-danger mb-4"><%= error %></div>
+        <% end %>
+        <h4>Your charter is ready to generate</h4>
+        <p class="text-muted">
+          Gemini will return a group charter (purpose, structure, commitments, and agreements),
+          a four-session S.A.F.E. launch sequence, and two boundary reminders for your facilitator.
+        </p>
+        <%= button_to "Generate charter",
+            support_group_charter_path(support_group),
+            class: "btn bg-accent btn-lg mt-2" %>
+      </div>
+    </div>
+  </div>
+
+  <div data-charter-loading-target="loading" class="d-none">
+    <div class="card">
+      <div class="card-body text-center py-5">
+        <div class="spinner-border mb-3" style="color: var(--accent);" role="status">
+          <span class="visually-hidden">Generating…</span>
+        </div>
+        <h4 class="mt-2">Generating your charter…</h4>
+        <p class="text-muted">This usually takes 10–20 seconds.</p>
+        <%= link_to "Cancel", support_group_path(support_group),
+            class: "btn btn-sm btn-outline-secondary mt-2",
+            data: { turbo_frame: "_top" } %>
+      </div>
+    </div>
+  </div>
+
+</div>

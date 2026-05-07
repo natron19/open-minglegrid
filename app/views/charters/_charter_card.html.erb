@@ -1,0 +1,36 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h4>Charter</h4>
+
+    <h6 class="mt-3">Purpose</h6>
+    <p><%= charter.purpose_statement %></p>
+
+    <h6>Meeting structure</h6>
+    <p><%= charter.meeting_structure %></p>
+
+    <h6>Member commitments</h6>
+    <p><%= charter.member_commitments %></p>
+
+    <h6>Group agreements</h6>
+    <ol>
+      <% charter.agreements_list.each do |agreement| %>
+        <li><%= agreement %></li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="card-footer d-flex align-items-center gap-3 flex-wrap">
+    <%= link_to "Print charter", print_support_group_charter_path(support_group),
+        class: "btn btn-sm btn-outline-secondary", target: "_blank" %>
+
+    <%= form_with url: regenerate_support_group_charter_path(support_group), method: :post,
+        class: "d-flex align-items-center gap-2" do |f| %>
+      <label class="d-flex align-items-center gap-1 small text-muted mb-0" style="cursor: pointer;">
+        <%= check_box_tag :regenerate_sessions, "1", false, class: "form-check-input mt-0" %>
+        Also regenerate sessions
+      </label>
+      <%= f.submit "Regenerate",
+          class: "btn btn-sm btn-outline-warning",
+          data: { turbo_confirm: "Regenerate the charter? Uncheck the box first if you want to keep your session schedule and progress." } %>
+    <% end %>
+  </div>
+</div>

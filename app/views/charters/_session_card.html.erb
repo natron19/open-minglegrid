@@ -1,0 +1,51 @@
+<div id="session-<%= session.id %>">
+  <div class="card mb-2 <%= "border-success border-opacity-50" if session.completed? %>">
+    <div class="card-header d-flex align-items-center gap-2 py-2 session-header"
+         data-bs-toggle="collapse"
+         data-bs-target="#session-body-<%= session.id %>">
+      <span class="session-badge flex-shrink-0">Session <%= session.session_number %></span>
+      <span class="flex-grow-1 fw-medium"><%= session.title %></span>
+      <% if session.scheduled_at.present? %>
+        <small class="text-muted text-nowrap"><%= session.scheduled_at.strftime("%b %-d, %Y %l:%M %p").strip %></small>
+      <% end %>
+      <% if session.completed? %>
+        <span class="badge bg-success ms-1">Done</span>
+      <% end %>
+    </div>
+
+    <div class="collapse" id="session-body-<%= session.id %>">
+      <div class="card-body">
+        <p class="mb-1"><strong>Check-in:</strong> <%= session.check_in_format %></p>
+        <p class="mb-1"><strong>Discussion:</strong> <%= session.discussion_topic %></p>
+        <p class="mb-1"><strong>Activity:</strong> <%= session.activity %></p>
+        <p class="mb-3"><strong>Closing:</strong> <%= session.closing_ritual %></p>
+
+        <div class="d-flex flex-wrap gap-2 align-items-end pt-3 border-top">
+          <%= form_with url: support_group_charter_session_path(support_group, session),
+              method: :patch, class: "d-flex align-items-center gap-2" do |f| %>
+            <label class="form-label small mb-0 text-muted">Schedule</label>
+            <%= f.datetime_local_field :scheduled_at,
+                value: session.scheduled_at&.strftime("%Y-%m-%dT%H:%M"),
+                class: "form-control form-control-sm",
+                style: "width: auto;" %>
+            <%= f.submit "Save", class: "btn btn-sm btn-outline-secondary" %>
+          <% end %>
+
+          <% if session.completed? %>
+            <%= button_to "Mark incomplete",
+                support_group_charter_session_path(support_group, session),
+                method: :patch,
+                params: { toggle_complete: "1" },
+                class: "btn btn-sm btn-outline-secondary" %>
+          <% else %>
+            <%= button_to "Mark complete",
+                support_group_charter_session_path(support_group, session),
+                method: :patch,
+                params: { toggle_complete: "1" },
+                class: "btn btn-sm btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

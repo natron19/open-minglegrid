@@ -1,0 +1,7 @@
+<div class="boundary-panel">
+  <h6>Boundary reminders</h6>
+  <p class="text-muted small mb-3">Use these if conversation drifts beyond what peer support can hold.</p>
+  <% charter.boundary_reminders_list.each do |reminder| %>
+    <p class="reminder-text"><%= reminder %></p>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<div class="container py-4">
+  <h1>Welcome back, <%= current_user.first_name %>!</h1>
+  <p class="text-muted">Your groups are the main event. Head there to generate or review a charter.</p>
+  <%= link_to "Go to your groups →", support_groups_path, class: "btn bg-accent" %>
+</div>

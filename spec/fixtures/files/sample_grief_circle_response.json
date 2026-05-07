@@ -1,0 +1,50 @@
+{
+  "purpose_statement": "This group provides structured peer support for adults navigating the first year of grief after losing a spouse or parent. Grounded in the S.A.F.E. framework, we create space for shared experience, mutual accountability, and steady forward movement. The group is not therapy; it is companionship with structure.",
+  "meeting_structure": "Each 90-minute meeting opens with a brief check-in round where each member shares one word or sentence about how they arrived. The facilitator introduces a discussion topic drawn from the S.A.F.E. Formation arc. Members share in turn, listening without cross-talk. A short paired activity follows. The meeting closes with a shared phrase or moment of silence chosen by the group in Session 1.",
+  "member_commitments": "Members agree to attend at least three of every four meetings. What is shared in the room stays in the room. Members listen to understand, not to fix. Members refrain from giving unsolicited advice or comparing grief timelines.",
+  "agreements": [
+    "Confidentiality: what is shared here stays here.",
+    "No advice unless asked for.",
+    "One voice at a time; no cross-talk.",
+    "It is okay to pass on any prompt.",
+    "Grief has no timeline; we do not compare losses."
+  ],
+  "sessions": [
+    {
+      "session_number": 1,
+      "title": "Trust Building",
+      "check_in_format": "Each member shares their name and one word describing how they arrived today.",
+      "discussion_topic": "What brought you to this group, and what do you hope to find here? What does support look like for you right now?",
+      "activity": "Pairs take three minutes each to share one memory of the person they lost, without interruption or response. Partners simply witness.",
+      "closing_ritual": "The group chooses a closing phrase together — a simple sentence spoken aloud by everyone — that will close every future session."
+    },
+    {
+      "session_number": 2,
+      "title": "Expectation Setting",
+      "check_in_format": "Each member shares one thing that happened this week, small or large.",
+      "discussion_topic": "What has surprised you most about grief? What do you wish people around you understood about where you are right now?",
+      "activity": "Each member writes one expectation they are releasing — something they thought grief would look like — on a card. Cards are shared aloud and collected by the facilitator.",
+      "closing_ritual": "The group's chosen closing phrase from Session 1."
+    },
+    {
+      "session_number": 3,
+      "title": "Deepening",
+      "check_in_format": "Each member shares one moment from the past two weeks where they felt the absence most.",
+      "discussion_topic": "What practices, routines, or people have helped you carry the weight this week? What gets harder before it gets easier?",
+      "activity": "Small group reflection: in triads, members take turns answering: what is one thing you are still learning about how to grieve?",
+      "closing_ritual": "The group's chosen closing phrase from Session 1."
+    },
+    {
+      "session_number": 4,
+      "title": "Pattern Review and Forward Planning",
+      "check_in_format": "Each member shares one thing that is different for them now compared to Session 1.",
+      "discussion_topic": "Looking at the past four sessions, what has shifted? What do you want to carry forward from this group into the next season of your life?",
+      "activity": "Each member writes a one-sentence intention for the next 30 days and shares it with the group. The facilitator reads them back at the close.",
+      "closing_ritual": "The group's chosen closing phrase, followed by a moment of silence."
+    }
+  ],
+  "boundary_reminders": [
+    "I want to pause here. What you are describing sounds like it may need more than our group can hold — have you considered speaking with a grief counselor or therapist one on one?",
+    "This group is peer support, not crisis support. If you are in acute distress right now, please reach out to the 988 Suicide and Crisis Lifeline or a trusted clinician before our next meeting."
+  ]
+}

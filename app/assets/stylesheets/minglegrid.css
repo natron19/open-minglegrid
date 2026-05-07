@@ -1,0 +1,62 @@
+/* Boundary reminder panel */
+.boundary-panel {
+  border: 1px dashed var(--accent-secondary);
+  border-radius: 6px;
+  padding: 1rem;
+  background-color: rgba(147, 197, 253, 0.05);
+}
+
+.boundary-panel .reminder-text::before {
+  content: "\201C";
+  color: var(--accent-secondary);
+  font-size: 1.2em;
+  margin-right: 0.25rem;
+}
+
+/* Session card accordion */
+.session-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Card hover state (used on group index cards) */
+.card-hover {
+  transition: border-color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.card-hover:hover {
+  border-color: var(--accent);
+}
+
+/* Session number badge */
+.session-badge {
+  background-color: var(--accent);
+  color: #1a1a1a;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.15em 0.5em;
+  font-size: 0.8rem;
+}
+
+/* Print styles */
+@media print {
+  .navbar, .btn, .alert-dismissible .btn-close {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .session-card {
+    page-break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  .charter-disclaimer {
+    page-break-before: always;
+  }
+}

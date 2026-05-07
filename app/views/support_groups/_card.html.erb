@@ -1,0 +1,15 @@
+<div class="card card-hover h-100">
+  <div class="card-body">
+    <h5 class="card-title"><%= group.name %></h5>
+    <span class="badge bg-secondary me-1"><%= group.organization_type.humanize %></span>
+    <span class="badge bg-secondary"><%= group.meeting_cadence.humanize %></span>
+  </div>
+  <div class="card-footer d-flex justify-content-between align-items-center">
+    <% if group.group_charter.present? %>
+      <span class="badge bg-success">Charter ready</span>
+    <% else %>
+      <span class="badge bg-secondary text-muted">No charter yet</span>
+    <% end %>
+    <%= link_to "View", support_group_path(group), class: "btn btn-sm bg-accent" %>
+  </div>
+</div>
