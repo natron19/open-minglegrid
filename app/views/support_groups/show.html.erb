@@ -28,7 +28,9 @@
         <% if @charter.nil? %>
           <%= render "charters/generate_cta", support_group: @support_group %>
         <% else %>
-          <%= render "charters/charter_card", support_group: @support_group, charter: @charter %>
+          <div id="charter-card">
+            <%= render "charters/charter_card", support_group: @support_group, charter: @charter %>
+          </div>
           <div class="mt-3">
             <% @sessions.each do |session| %>
               <%= render "charters/session_card", session: session, support_group: @support_group %>

@@ -10,7 +10,6 @@ class ChartersController < ApplicationController
 
   def regenerate
     include_sessions = params[:regenerate_sessions] == "1"
-    @support_group.group_charter&.destroy if include_sessions
     generate_charter(include_sessions: include_sessions)
   end
 
@@ -79,6 +78,7 @@ class ChartersController < ApplicationController
       end
 
       if include_sessions
+        charter.launch_sessions.destroy_all
         data["sessions"].each do |s|
           charter.launch_sessions.create!(
             session_number:   s["session_number"],
@@ -114,9 +114,15 @@ class ChartersController < ApplicationController
     @sessions = @charter&.launch_sessions&.order(:session_number)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update("charter-region",
-          partial: "charters/generate_cta",
-          locals: { support_group: @support_group, error: flash[:alert] })
+        if @charter
+          render turbo_stream: turbo_stream.update("charter-card",
+            partial: "charters/charter_card",
+            locals: { support_group: @support_group, charter: @charter, error: flash[:alert] })
+        else
+          render turbo_stream: turbo_stream.update("charter-region",
+            partial: "charters/generate_cta",
+            locals: { support_group: @support_group, error: flash[:alert] })
+        end
       end
       format.html { redirect_to support_group_path(@support_group), alert: flash[:alert] }
     end

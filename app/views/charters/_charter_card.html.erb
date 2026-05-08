@@ -1,5 +1,8 @@
 <div class="card mb-3">
   <div class="card-body">
+    <% if local_assigns[:error].present? %>
+      <div class="alert alert-danger mb-3"><%= error %></div>
+    <% end %>
     <h4>Charter</h4>
 
     <h6 class="mt-3">Purpose</h6>
@@ -18,19 +21,35 @@
       <% end %>
     </ol>
   </div>
-  <div class="card-footer d-flex align-items-center gap-3 flex-wrap">
-    <%= link_to "Print charter", print_support_group_charter_path(support_group),
-        class: "btn btn-sm btn-outline-secondary", target: "_blank" %>
+  <div class="card-footer"
+       data-controller="charter-loading"
+       data-action="turbo:submit-start->charter-loading#start">
 
-    <%= form_with url: regenerate_support_group_charter_path(support_group), method: :post,
-        class: "d-flex align-items-center gap-2" do |f| %>
-      <label class="d-flex align-items-center gap-1 small text-muted mb-0" style="cursor: pointer;">
-        <%= check_box_tag :regenerate_sessions, "1", false, class: "form-check-input mt-0" %>
-        Also regenerate sessions
-      </label>
-      <%= f.submit "Regenerate",
-          class: "btn btn-sm btn-outline-warning",
-          data: { turbo_confirm: "Regenerate the charter? Uncheck the box first if you want to keep your session schedule and progress." } %>
-    <% end %>
+    <div data-charter-loading-target="cta" class="d-flex align-items-center gap-3 flex-wrap">
+      <%= link_to "Print charter", print_support_group_charter_path(support_group),
+          class: "btn btn-sm btn-outline-secondary", target: "_blank" %>
+
+      <%= form_with url: regenerate_support_group_charter_path(support_group), method: :post,
+          class: "d-flex align-items-center gap-2" do |f| %>
+        <label class="d-flex align-items-center gap-1 small text-muted mb-0" style="cursor: pointer;">
+          <%= check_box_tag :regenerate_sessions, "1", false, class: "form-check-input mt-0" %>
+          Also regenerate sessions
+        </label>
+        <%= f.submit "Regenerate",
+            class: "btn btn-sm btn-outline-warning",
+            data: { turbo_confirm: "Regenerate the charter? Uncheck the box first if you want to keep your session schedule and progress." } %>
+      <% end %>
+    </div>
+
+    <div data-charter-loading-target="loading" class="d-none d-flex align-items-center gap-3">
+      <div class="spinner-border spinner-border-sm" style="color: var(--accent);" role="status">
+        <span class="visually-hidden">Regenerating…</span>
+      </div>
+      <span class="text-muted small">Regenerating your charter… This usually takes 10–20 seconds.</span>
+      <%= link_to "Cancel", support_group_path(support_group),
+          class: "btn btn-sm btn-outline-secondary ms-auto",
+          data: { turbo_frame: "_top" } %>
+    </div>
+
   </div>
 </div>
