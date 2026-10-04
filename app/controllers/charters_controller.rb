@@ -50,6 +50,10 @@ class ChartersController < ApplicationController
     end
     render_charter_error
 
+  rescue GeminiService::CrisisError
+    flash_error(AiGatekeeper::CRISIS_MESSAGE)
+    render_charter_error
+
   rescue GeminiService::GatekeeperError
     flash_error("Your group description triggered a safety check. Try shortening it or removing copied content.")
     render_charter_error

@@ -1,0 +1,35 @@
+# Per-app guardrail configuration, read by AiGuardConfig.
+# See docs/ai-guardrails.md (Layer 1b: AiOutputGuard) and docs/ai-evals.md.
+
+# Inputs containing any of these phrases are answered with crisis resources
+# instead of an AI call. MingleGrid inputs describe a group, not the user, so
+# these are first-person distress phrases. Bare "suicide" is deliberately absent:
+# groups for suicide-loss survivors are legitimate peer support.
+crisis_terms:
+  - kill myself
+  - killing myself
+  - end my life
+  - ending my life
+  - take my own life
+  - want to die
+  - wanna die
+  - hurt myself
+  - harming myself
+  - no reason to live
+  - better off dead
+  - i am suicidal
+  - i'm suicidal
+
+# Output structure rules per AiTemplate name.
+#   format:        text | json
+#   required_keys: top-level keys the JSON object must contain
+templates:
+  health_ping:
+    format: text
+  # CharterParser needs a JSON object, but the system prompt allows a
+  # {"refusal": "..."} object for clinical briefs, which the controller shows to
+  # the user. Requiring charter keys here would turn those refusals into a
+  # generic output_blocked error, so only the JSON format is enforced. The
+  # parser still validates the full schema (4-5 agreements, sessions 1-4, 2 reminders).
+  minglegrid_charter_v1:
+    format: json
