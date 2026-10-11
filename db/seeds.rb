@@ -35,7 +35,7 @@ end
 
 puts "Seeded: demo_placeholder_v1 AI template"
 
-AiTemplate.find_or_create_by!(name: "minglegrid_charter_v1") do |t|
+AiTemplate.find_or_initialize_by(name: "minglegrid_charter_v1").tap do |t|
   t.description = "Generates a S.A.F.E. peer support group charter, four-session launch sequence, and two facilitator boundary reminders."
   t.model       = "gemini-2.5-flash"
   t.max_output_tokens = 3000
@@ -87,9 +87,17 @@ AiTemplate.find_or_create_by!(name: "minglegrid_charter_v1") do |t|
     - The four sessions MUST follow the S.A.F.E. Formation arc:
       Session 1 trust building, Session 2 expectation setting, Session 3 deepening,
       Session 4 pattern review and forward planning
-    - boundary_reminders MUST contain exactly 2 entries. Each is a short phrase
-      (under 30 words) the facilitator can say verbatim when conversation drifts
-      into clinical, legal, or crisis territory peer support cannot hold
+    - boundary_reminders MUST contain exactly 2 entries. Each is one short sentence
+      (under 30 words and under 200 characters) the facilitator can say verbatim when conversation drifts
+      into clinical, legal, or crisis territory peer support cannot hold.
+      Each reminder names a risk specific to this group's purpose AND says where
+      to take it (a licensed professional, a doctor, HR or legal counsel, or a
+      crisis line such as 988)
+    - If the purpose touches suicide, self-harm, or loss to suicide, one reminder
+      tells the facilitator to connect any member who discloses suicidal thoughts
+      with 988 or a professional right away
+    - If the purpose involves cutting back on alcohol or drugs, one reminder tells
+      members who may be physically dependent to talk with a doctor before stopping
     - All output text is in plain prose. No markdown, no headings, no bullet
       characters inside string values
 
@@ -124,6 +132,7 @@ AiTemplate.find_or_create_by!(name: "minglegrid_charter_v1") do |t|
     Watch for: drift toward clinical language in agreements; Session 3 going too deep;
     boundary reminders being too similar. If reminders are paraphrases of each other, regenerate.
   NOTES
+  t.save!
 end
 
 puts "Seeded: minglegrid_charter_v1 AI template"
